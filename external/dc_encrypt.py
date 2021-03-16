@@ -1,14 +1,29 @@
-import sys
+#  Copyright (c) 2021. Clinton Fernandes (clintonf@gmail.com
+
+import argparse
 from fernet_encrypt_decrypt import *
 
+
+def create_arguments() -> argparse:
+    f"""
+    Parses command line arguments.
+
+    :return: {argparse}
+    """
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("message", help="message to encrypt")
+
+    return parser
+
+
 def main():
-    message = sys.argv[1]
+    args = create_arguments().parse_args()
 
-    pre_key = get_key_from_file("keyfile")
-    key = Fernet(pre_key)
-    e_message = encrypt(key, message)
+    key = get_key_from_file(KEY_FILENAME)
+    e_message = encrypt(key, args.message)
 
-    print(e_message)
+    print(e_message.decode())
 
 
 if __name__ == '__main__':

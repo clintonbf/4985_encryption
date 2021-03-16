@@ -1,13 +1,10 @@
 const {spawn} = require('child_process');
 
-const msg = "Hello HoboCat";
-
 const object = {
     "name": "Clint",
     "profession": "Student",
     "program": "CST"
 };
-
 
 const python = spawn('python', ['./external/dc_encrypt.py', JSON.stringify(object)]); // Will NOT work in Windows
 let dataToSend;
