@@ -4,6 +4,9 @@ from fernet_encrypt_decrypt import *
 import argparse
 from os import path
 
+FILE_SOURCE = 1
+CLI_SOURCE  = 2
+
 
 def check_for_keyfile(filename: str):
     f"""
@@ -26,13 +29,16 @@ def create_arguments() -> argparse:
     """
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--keyfile", help="file with encryption key. Default = 'keyfile'")
-    parser.add_argument("filename", help="file to decrypt")
+    parser.add_argument("--keyfile", help="file with encryption key. Defaults to 'keyfile'")
+
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("--filename", help="file with encrypted message")
+    group.add_argument("--message", help="encrypted message passed on command line")
 
     return parser
 
 
-def get_message(filename: str) -> bytes:
+def get_message_from_file(filename: str) -> bytes:
     f"""
     Reads in an encrypted message.
     
@@ -46,6 +52,21 @@ def get_message(filename: str) -> bytes:
     return contents.encode()
 
 
+def get_encrypted_message(source: str, source_type: int) -> bytes:
+    f"""
+    Gets the encrypted message.
+    
+    :param source: {str}  the encrypted message (or filename containing it)
+    :param source_type: {int} the type of the source (file or CLI)
+    :return: 
+    """
+    if source_type == FILE_SOURCE:
+        return get_message_from_file(source)
+
+    if source_type == CLI_SOURCE:
+        return source.encode()
+
+
 def main():
     args = create_arguments().parse_args()
 
@@ -53,7 +74,10 @@ def main():
 
     key = get_key_from_file(keyfile)
 
-    message = get_message(args.filename)
+    message_source = args.filename if args.filename else args.message
+    source_type = FILE_SOURCE if args.filename else CLI_SOURCE
+
+    message = get_encrypted_message(message_source, source_type)
     m = decrypt(key, message)
     print(m)
 
