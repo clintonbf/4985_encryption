@@ -1,3 +1,5 @@
+import {ENCRYPT_SCRIPT} from "./resources";
+
 const {spawn} = require('child_process');
 
 const object = {
@@ -6,7 +8,9 @@ const object = {
     "program": "CST"
 };
 
-const python = spawn('python', ['./python/dc_encrypt.py', JSON.stringify(object)]); // Will NOT work in Windows
+const DATA_TO_ENCRYPT = JSON.stringify(object);
+
+const python = spawn('python', [ENCRYPT_SCRIPT, DATA_TO_ENCRYPT]); // Will NOT work in Windows
 let dataToSend;
 
 python.stdout.on('data', (data) => {
