@@ -8,11 +8,12 @@ def create_arguments() -> argparse:
     f"""
     Parses command line arguments.
 
-    :return: {argparse}
+    :return: {argparse}  
     """
     parser = argparse.ArgumentParser()
 
     parser.add_argument("message", help="message to encrypt")
+    parser.add_argument("--keyfile", help="encryption key file")
 
     return parser
 
@@ -20,7 +21,9 @@ def create_arguments() -> argparse:
 def main():
     args = create_arguments().parse_args()
 
-    key = get_key_from_file(KEY_FILENAME)
+    keyfile = args.keyfile if args.keyfile else KEY_FILENAME
+
+    key = get_key_from_file(keyfile)
     e_message = encrypt(key, args.message)
 
     print(e_message.decode())

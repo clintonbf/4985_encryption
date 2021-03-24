@@ -6,8 +6,9 @@ const object = {
     "program": "CST"
 };
 
-const python = spawn('python', ['./python/dc_encrypt.py', JSON.stringify(object)]); // Will NOT work in Windows
-let dataToSend;
+let encryptedMessage;
+
+const python = spawn('python', ['./python/dc_decrypt.py', encryptedMessage]); // Will NOT work in Windows
 
 python.stdout.on('data', (data) => {
     console.log(`Got data "${data.toString()}"`);
