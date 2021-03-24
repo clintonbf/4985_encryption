@@ -11,7 +11,7 @@ This project is split into two parts:
 
 The python scripts can be used as-is. The main ones are
 * ```dc_encrypt.py <message to encrypt> [--keyfile KEYFILE]```
-* ```dc_decrypt.py <encrypted file>     [--keyfile KEYFILE]```
+* ```dc_decrypt.py <encrypted file> || <encrypted mesage>     [--keyfile KEYFILE]```
 
 An encryption keyfile is included in the repo. This is a terrible practice (I can think of few that are worse) but, for the 4985 project purpose, it's fine.  
 
