@@ -1,12 +1,6 @@
 const {spawn} = require('child_process');
 
-const object = {
-    "name": "Clint",
-    "profession": "Student",
-    "program": "CST"
-};
-
-let encryptedMessage;
+const encryptedMessage = "./encrypted_message";
 
 const python = spawn('python', ['./python/dc_decrypt.py', encryptedMessage]); // Will NOT work in Windows
 
