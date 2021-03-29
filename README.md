@@ -9,6 +9,8 @@ This project is split into two parts:
 
 ### Python scripts
 
+Python 3.x is needed for this (I'm pretty sure; I tested with 3.8)
+
 The python scripts can be used as-is. The main ones are
 * ```dc_encrypt.py <message to encrypt> [--keyfile KEYFILE]```
 * ```dc_decrypt.py <encrypted file> || <encrypted mesage>     [--keyfile KEYFILE]```

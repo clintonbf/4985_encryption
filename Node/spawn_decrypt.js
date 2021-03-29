@@ -1,10 +1,11 @@
+import {DECRYPT_SCRIPT} from "./resources";
+import {ENCRYPTED_MESSAGE} from "./resources";
+
 const {spawn} = require('child_process');
 
-const SCRIPT = './python/dc_decrypt.py';
 const SOURCE = '-- filename';
-const ENCRYPTED_MESSAGE = "./encrypted_message";
 
-const python = spawn('python', [SCRIPT, SOURCE, ENCRYPTED_MESSAGE]); // Will NOT work in Windows
+const python = spawn('python', [DECRYPT_SCRIPT, SOURCE, ENCRYPTED_MESSAGE]); // Will NOT work in Windows
 
 python.stdout.on('data', (data) => {
     console.log(`Got data "${data.toString()}"`);
