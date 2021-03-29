@@ -3,7 +3,7 @@
 const {spawn} = require('child_process');
 const fs = require('fs');
 
-const PYTHON_PATH = '../python';
+const PYTHON_PATH = '../../python';
 const ENCRYPT_SCRIPT = PYTHON_PATH + '/dc_encrypt.py';
 const DECRYPT_SCRIPT = PYTHON_PATH + '/dc_decrypt.py';
 
